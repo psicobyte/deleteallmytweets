@@ -14,7 +14,7 @@ deleteallmytweets
 
 ## Uso
 
-*deleteallmytweets* usa python 2 (básicamente porque he canibalizado el código de un programa anterior, aunque portarlo a python 3 es muy simple.)
+Esta versión de *deleteallmytweets* usa python 2 (básicamente porque he canibalizado el código de un programa anterior) pero en la rama principal de este proyecto está la versión para Python 3.
 
 Al ejecutar el programa, muestra una advertencia avisando de que borrará todos los tweets de la cuenta y pide confirmación. Si se escribe la palabra BORRAR (en mayúsculas) comenzará el proceso. Cualquier otro texto abortará el borrado.
 
