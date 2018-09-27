@@ -97,7 +97,7 @@ def batch_delete_tweets(config,file_csv):
         reader = csv.DictReader(csvfile)
 
         deleted = 0
-	undeleted = 0
+        undeleted = 0
 
         for row in reader:
 
