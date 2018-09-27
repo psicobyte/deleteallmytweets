@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #coding: utf-8
 
 # CopyRight 2018 Allan Psicobyte (psicobyte@gmail.com)
@@ -19,7 +19,7 @@
 
 import os
 import sys
-import ConfigParser
+import configparser
 import csv
 import tweepy
 
@@ -30,13 +30,13 @@ def main(argv):
 
     file_csv = 'tweets.csv'
 
-    response = raw_input('Este programa borrará TODOS sus tweets. Escriba BORRAR para hacerlo, cualquier otra cosa para cancelar: ')
+    response = input('Este programa borrará TODOS sus tweets. Escriba BORRAR para hacerlo, cualquier otra cosa para cancelar: ')
 
     if response == 'BORRAR':
-        print 'Borrando:'
+        print('Borrando:')
         batch_delete_tweets(config,file_csv)
     else:
-        print 'Operación cancelada. No se borrará nada'
+        print('Operación cancelada. No se borrará nada')
 
 def open_config():
     """Busca y abre un archivo INI para extraer las contraseñas y la configuración
@@ -57,7 +57,7 @@ def open_config():
         show_error("Falta archivo INI")
         sys.exit()
 
-    config = ConfigParser.ConfigParser()
+    config = configparser.ConfigParser()
 
     config.read(configfile)
 
@@ -104,20 +104,20 @@ def batch_delete_tweets(config,file_csv):
             try:
                 api.destroy_status(row['tweet_id'])
                 deleted += 1
-                print "OK: ", row['tweet_id']
+                print("OK: ", row['tweet_id'])
             except tweepy.error.TweepError:
                 undeleted += 1
-                print "ERROR: ", row['tweet_id']
+                print("ERROR: ", row['tweet_id'])
 
-    print "Proceso finalizado."
-    print deleted, " tweets borrados."
-    print undeleted, " tweets no han podido ser borrados."
+    print("Proceso finalizado.")
+    print(deleted, " tweets borrados.")
+    print(undeleted, " tweets no han podido ser borrados.")
 
 
 def show_error(error):
     """Muestra los errores, o los mostrará cuando esta función esté hecha"""
     
-    print error
+    print(error)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
