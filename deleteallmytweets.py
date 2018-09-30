@@ -92,26 +92,32 @@ def batch_delete_tweets(config,file_csv):
 
     api = login_api(config)
 
-    with open(file_csv, 'r') as csvfile:
 
-        reader = csv.DictReader(csvfile)
+    try:
 
-        deleted = 0
-        undeleted = 0
+        with open(file_csv, 'r') as csvfile:
 
-        for row in reader:
+            reader = csv.DictReader(csvfile)
 
-            try:
-                api.destroy_status(row['tweet_id'])
-                deleted += 1
-                print("OK: ", row['tweet_id'])
-            except tweepy.error.TweepError:
-                undeleted += 1
-                print("ERROR: ", row['tweet_id'])
+            deleted = 0
+            undeleted = 0
 
-    print("Proceso finalizado.")
-    print(deleted, " tweets borrados.")
-    print(undeleted, " tweets no han podido ser borrados.")
+            for row in reader:
+
+                try:
+                    api.destroy_status(row['tweet_id'])
+                    deleted += 1
+                    print("OK: ", row['tweet_id'])
+                except tweepy.error.TweepError:
+                    undeleted += 1
+                    print("ERROR: ", row['tweet_id'])
+
+        print("Proceso finalizado.")
+        print(deleted, " tweets borrados.")
+        print(undeleted, " tweets no han podido ser borrados.")
+
+    except FileNotFoundError:
+        show_error("No se ha podido abrir el archivo " + file_csv)
 
 
 def show_error(error):
